@@ -21,6 +21,9 @@ module ConsulCookbook
       # @!attribute config_file
       # @return [String]
       attribute(:config_file, kind_of: String, default: lazy { node['consul']['config']['path'] })
+      # @!attribute cli_opts
+      # @return [String]
+      attribute(:cli_opts, kind_of: String, default: lazy { node['consul']['cli_opts'].join(' ') })
       # @!attribute user
       # The service user the Consul process runs as.
       # @return [String]
@@ -52,7 +55,7 @@ module ConsulCookbook
       attribute(:acl_token, kind_of: String, default: lazy { node['consul']['config']['acl_master_token'] })
 
       def command
-        "#{program} agent -config-file=#{config_file} -config-dir=#{config_dir}"
+        "#{program} agent #{cli_opts} -config-file=#{config_file} -config-dir=#{config_dir}"
       end
 
       def shell_environment

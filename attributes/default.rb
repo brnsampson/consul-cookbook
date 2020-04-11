@@ -10,6 +10,11 @@ default['consul']['service_user'] = 'consul'
 default['consul']['service_group'] = 'consul'
 default['consul']['create_service_user'] = true
 
+# Add a set of extra cli options to the consul service. For clarity, add them as individual items.
+# e.g. ['-dev', '-bootstrap-expect', '3']
+# HOWEVER, prefer to only use this for cli options which are not available in the config file like -dev.
+default['consul']['cli_opts'] = []
+
 #Consul Config section - Alphabetical order
 default['consul']['config']['ca_file'] = join_path config_prefix_path, 'ssl', 'CA', 'ca.crt'
 default['consul']['config']['cert_file'] = join_path config_prefix_path, 'ssl', 'certs', 'consul.crt'
